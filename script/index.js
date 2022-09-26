@@ -45,7 +45,7 @@ fetch('https://swapi.dev/api/people')
                     <div class = 'card_content'>
         
                            <a href='#' onclick='event.preventDefault()'>${prop.name}</a>
-                            <p class='click'>Height  : ${ prop.height } </p>
+                            <p class='click'>Height  : ${ prop.height }cm </p>
                             <p class='click'>Gender  :  ${ prop.gender?prop.gender: ' N/A '}</p>
                     
                     </div>
