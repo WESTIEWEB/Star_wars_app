@@ -3,14 +3,41 @@
 // module.exports = { main }
 
 
-// let API_url = 'https://swapi.dev/api/people';
+// let API_url = 'https://swapi.dev/api/people/?page=1';
 
 //this async method fetches the info from the api,
 // then returns it as a response which is the given to the data variable in a json format
-fetch('https://swapi.dev/api/people')
-    .then(response => response.json())
-    .then(data => {
-        
+
+
+async function fetchPeople() {
+
+    try {
+
+        const response = await fetch('https://swapi.dev/api/people');
+
+        if(!response.ok) {
+            throw new Error(`Something went weong: ${response.status}`)
+        }
+
+        return response.json()
+    }
+
+    catch(e) {
+        console.log(e);
+    }
+}
+
+
+//this function is used in creating the people list and web kits i.e the html tags
+function listPeople(elementId) {
+
+    const poepleContainerElement = document.getElementById(elementId);
+
+    if (!elementId) {
+        return
+    }
+
+    fetchPeople().then(data => {
 
         //the project demands that we return images or dummy images, but i decided to create arrays of image to be added as new properties to our fetchd object
 
@@ -59,21 +86,17 @@ fetch('https://swapi.dev/api/people')
 
         // console.log(obj_array);
 
-        document.getElementById('root').innerHTML = output;
+        poepleContainerElement.innerHTML = output;
         
-    return output;
- }).catch(err=> console.log('somethin went wrong: ', err));
+
+    }).catch(err => {
+        console.log('No Actor Found', err)
+    })
+
+    // return poepleContainerElement;
 
 
 
-//  const fetch_url = async (url) => {
+ 
+};
 
-//         const response = await fetch(`${API_URL}`); 
-//         const data = await response.json();
-
-//         let obj_array = data.results;
-
-
-
-
-// }
